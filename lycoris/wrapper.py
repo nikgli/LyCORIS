@@ -562,6 +562,10 @@ class LycorisNetwork(torch.nn.Module):
         for lora in self.loras:
             lora.restore()
 
+    def unmerge(self, weight=-1):
+        for lora in self.loras:
+            lora.merge_to(weight)  # Revert by subtracting the effect
+
     def merge_to(self, weight=1.0):
         for lora in self.loras:
             lora.merge_to(weight)
